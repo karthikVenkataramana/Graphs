@@ -1,18 +1,36 @@
-// Date: 08 / 07 / 2017
-// Author : Karthik Venkataramana Pemmaraju
+/*
+Author: Karthik Venkataramana Pemmaraju
+Date: 08/07/2017
+Description: DFS, BFS, Topological sort and Shortest path in unweighted graph(using BFS) is demonstrated below.
+*/
+
 import java.util.*;
+/*
+  A graph is built of nodes. which have below fields.
+*/
+class Graph{
+  int V;
+  int E;
+  List<Node> nodes;
+  public Graph(int V, int E){
+    this.V = V;
+    this.E = E;
+    nodes = new ArrayList<Node>();
+  }
+}
 
 class Node{
   char name;
   boolean isVisited;
   int indegree;
-  List<Node> outgoing_nodes; // Each node has an outgoing node.
+  List<Node> outgoing_nodes; // Connection of each nodes.
   protected Node(char name){
     this.name = name;
     this.outgoing_nodes = new ArrayList<Node>();
     this.isVisited = false;
     this.indegree = 0;
   }
+  // We say two nodes are equal, if they bear the same name.
   @Override
   public boolean equals(Object object){
     if(object == null)
@@ -24,16 +42,6 @@ class Node{
   }
 }
 
-class Graph{
-  int V;
-  int E;
-  List<Node> nodes;
-  public Graph(int V, int E){
-    this.V = V;
-    this.E = E;
-    nodes = new ArrayList<Node>();
-  }
-}
 
 public class Solution{
 
@@ -48,7 +56,9 @@ public class Solution{
     // logic is to use Stack. (We get that by recursion.) Backtracking. Similar to preorder traversal.
     if(!start.isVisited)
     System.out.print(start.name + "   ");
+    
     start.isVisited = true;
+    
     for(Node node: start.outgoing_nodes){
       if(!node.isVisited)
         DFS(node);
@@ -64,8 +74,7 @@ public class Solution{
     start.isVisited = false; // Missed this statement, first - time.
 
     while(!queue.isEmpty()){
-      Node node = queue.poll(); // Returns head value and removes it. Manaku kavlsindhe, Hehehe :)
-      System.out.print(node.name + "   ");
+      Node node = queue.poll(); // Returns head value and removes it.
       for(Node out_nodes: node.outgoing_nodes){
         if(out_nodes.isVisited) // Initially, isVisited is false, for DFS we set it to TRUE. So, for BFS we do the reverse process.
           queue.add(out_nodes);
@@ -119,7 +128,7 @@ public class Solution{
           }
           out_node.isVisited = true;
         }
-        if(loopers)
+        if(loopers) // Add distance only if loopers flag is set.
           distance++;
 
       } // End while.
