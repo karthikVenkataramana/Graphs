@@ -1,3 +1,10 @@
+/*
+Author: Karthik Venkataramana Pemmaraju
+Date: 08/10/2017
+Description: Computes shortest path from a given node to every other node in the graph.
+ Doesn't work with negative weights.
+*/
+
 import java.util.*;
 /*
  So, A graph is a collection of nodes.
@@ -6,14 +13,16 @@ import java.util.*;
 class Graph{
   int V;      // No. of vertices
   int E;      // No. of Edges.
-  List<Node> nodes;
+  List<Node> nodes; 
   Graph(int V, int E){
     this.V = V;
     this.E = E;
     nodes = new ArrayList<Node>();
   }
 }
-
+/*
+An edge has a source, sink and weight.
+*/
 class Edge{
   Node source;
   Node sink;
@@ -32,7 +41,7 @@ class Node{
   int indegree;
   Node previous;
   List<Edge> outgoing_nodes;
-  Node(char name){
+  Node(char name){ // Setting up initial values.
     this.name = name;
     this.isVisited = false;
     this.indegree = 0;
@@ -40,7 +49,7 @@ class Node{
     this.distance = Integer.MAX_VALUE;
     this.outgoing_nodes = new ArrayList<Edge>();
   }
-
+ // We deem two objects two be equal when they have the same name.
   @Override
   public boolean equals(Object object){
     if(object == null)
@@ -61,8 +70,8 @@ public class Dijkstra{
     a.outgoing_nodes.add(edge);
   }
   /*
-      Get's minimum distance node. if it isn't already visited.
-      If min is Infinite, we return null.
+     Description:  Get's minimum distance node. if it isn't already visited.
+      If minimim is Infinite, we return null.
   */
   protected static Node getMinDistance(Graph graph){
     Node minNode = null;
@@ -83,6 +92,9 @@ public class Dijkstra{
 
     return minNode;
   }
+ /*
+  Description: Core logic is implemented here.
+ */
 
   protected static void dijkstra(Graph graph, Node start){
     // Set all distances except for source to infinite. that is done while creating object.
