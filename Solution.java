@@ -43,7 +43,7 @@ class Node{
 }
 
 
-public class Solution{
+public class BFS_DFS{
 
   // Establishes a two - way connection between a to b.
   protected static void setEdge(Node a, Node b){
@@ -136,7 +136,7 @@ public class Solution{
 
 
   public static void main(String[] args) {
-      Solution solution = new Solution();
+      BFS_DFS bfs_dfs = new BFS_DFS();
       Graph graph = new Graph(8, 8); // 8 vertices and 8 edges.
       Node A = new Node('A');
       Node B = new Node('B');
@@ -183,6 +183,6 @@ Graph:
       System.out.println("\n\nTopological Ordering:");
       topologicalSort(graph);
       System.out.println("\n************************");
-      solution.shortestPathsInUndirectedGraph(G);
+      bfs_dfs.shortestPathsInUndirectedGraph(G);
   }
 }
